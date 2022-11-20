@@ -1,5 +1,5 @@
 import numpy as np
-def random_predict(number:int=1)->int:
+def random_predict(number:int=np.random.randint(1,101))->int:
     """Рандомно угадываем число
 
     Args:
@@ -9,10 +9,18 @@ def random_predict(number:int=1)->int:
         int: Загаданное число
     """
     count = 0
+    max_number = 100
+    min_number = 0
+    predict_number = np.random.randint(1,101)
     while True:
         count += 1
-        predict_number = np.random.randint(1,101)
-        if number == predict_number:
+        if predict_number > number:
+            max_number = predict_number - 1
+            predict_number = (max_number + min_number)//2
+        elif predict_number < number:
+            min_number = predict_number + 1
+            predict_number = (max_number + min_number)//2
+        else:
             break
     return(count)
 print(f'Количество попыток: {random_predict()}')
